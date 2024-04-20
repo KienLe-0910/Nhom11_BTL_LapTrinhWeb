@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE WEEKEND</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;700&family=Fjalla+One&display=swap"
+        rel="stylesheet">
+
+    <link rel="xo-icon" sizes="180x180" href="{{ url_for('static', filename='images/icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/icon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/icon.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='images/icon.png') }}">
+
+    <link rel="stylesheet"  href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <header>
+        <div class="wrapper">
+            <nav>
+                <div class="logo">
+                    <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/tw-sitelogo.png') }}" alt=""></a>
+                </div>
+                <ul class="nav-menu">
+                    <li>
+                        <a href="#" class="nav-link">NEWS</a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link">MUSIC</a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link">VIDEOS</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('store') }}" class="nav-link">STORE</a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link">XOFUND</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('signup') }}" class="nav-link">NEWSLETTER</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('signup') }}" class="nav-link">CART</a>
+                    </li>
+                </ul>
+                <ul>
+                    {% if session['username'] %}
+                        <li><a href="/account">{{ session['username'] }}</a></li>
+                        <li><a href="/logout">LOGOUT</a></li>
+                    {% else %}
+                        <li><a href="/signin">LOGIN</a></li>
+                        <li><a href="/signup">SIGNUP</a></li>
+                    {% endif %}
+                    <li><a href="/store">Store</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+            <!-- End of navigaion menu -->
+
+            <div class="herosection">
+                <img src="{{ url_for('static', filename='images/tour-title-gst.png') }}" alt="">
+                <div class="dates">
+                    <a href="#">CLICKS FOR DATES</a>
+                </div>
+            </div>
+            <!-- End of hero section -->
+        </div>
+    </header>
+
+    <div class="wrapper">
+    <section class="videossection">
+    <div class="content">
+        {% for video in videos %}
+        <div class="mySlides">
+            <img src="{{ url_for('static', filename=video['image_url']) }}" style="width:100%">
+            <a href="#">{{ video['title'] }}</a>
+        </div>
+        {% endfor %}
+        <div class="butt">
+            <button class="button-" onclick="plusDivs(-1)">&#10094;</button>
+            <button class="button--" onclick="plusDivs(1)">&#10095;</button>
+        </div>
+    </div>
+    </section>
+    </div>
+    <!-- End of videos section -->
+
+    <div class="wrapper">
+    <section class="musicsection">
+    <div class="left">
+        <div class="item large">
+            <img src="{{ url_for('static', filename=music[0].image_url) }}" alt="">
+            <div class="play">
+                <a href="#">{{ music[0].type }}</a>
+                <img src="{{ url_for('static', filename='images/🦆 icon _play outline_.svg') }}" alt="">
+            </div>
+            <h3>{{ music[0].title }}</h3>
+        </div>
+    </div>
+    <div class="right">
+        <div class="right1">
+            {% for item in music[1:3] %}
+            <div class="item small">
+                <img src="{{ url_for('static', filename=item.image_url) }}" alt="">
+                <div class="play">
+                    <a href="#">{{ item.type }}</a>
+                    <img src="{{ url_for('static', filename='images/🦆 icon _play outline_.svg') }}" alt="">
+                </div>
+                <h3>{{ item.title }}</h3>
+            </div>
+            {% endfor %}
+        </div>
+        <div class="right1">
+            {% for item in music[3:5] %}
+            <div class="item small">
+                <img src="{{ url_for('static', filename=item.image_url) }}" alt="">
+                <div class="play">
+                    <a href="#">{{ item.type }}</a>
+                    <img src="{{ url_for('static', filename='images/🦆 icon _play outline_.svg') }}" alt="">
+                </div>
+                <h3>{{ item.title }}</h3>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+    </section>
+    </div>
+    <!--End of music section-->
+
+    <div class="wrapper">
+        <section class="shopsection">
+            <div class="shop">
+                <a href="{{ url_for('store') }}">
+                    <h2>VISIT THE OFFICIAL ONLINE SHOP</h2>
+                </a>
+            </div>
+        </section>
+    </div>
+    <!-- End of destop shop section -->
+
+    <div class="wrapper">
+    <section class="footersection">
+        <div class="follow">
+            <ul>
+                <li>
+                    <a href="#"><img src="{{ url_for('static', filename='images/facebook.png') }}" width="22"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="{{ url_for('static', filename='images/instagram.png') }}" width="22"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="{{ url_for('static', filename='images/twitter.png') }}" width="22"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="{{ url_for('static', filename='images/youtube.png') }}" width="22"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="{{ url_for('static', filename='images/soundcloud.png') }}" width="22"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="{{ url_for('static', filename='images/apple.png') }}" width="22"></a>
+                </li>
+                <li>
+                    <a href="#"><img src="{{ url_for('static', filename='images/spotify.png') }}" width="22"></a>
+                </li>
+            </ul>
+        </div>
+        <div class="link">
+            <ul>
+                <li>
+                    <a href="#">COPYRIGHT REPLUBIC RECORD</a>
+                </li>
+                <li>
+                    <a href="#">TERMS & CONDITIONS</a>
+                </li>
+                <li>
+                    <a href="#">PRIVACY POLICY</a>
+                </li>
+                <li>
+                    <a href="#">DO NOT SELL MY PERSONAL INFOMATION</a>
+                </li>
+            </ul>
+        </div>
+    </section>
+    </div>
+<!-- End of footer section -->
+
+<script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+
+</html>

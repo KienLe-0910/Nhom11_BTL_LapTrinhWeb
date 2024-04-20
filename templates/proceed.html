@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE WEEKEND</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;700&family=Fjalla+One&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link rel="xo-icon" sizes="180x180" href="{{ url_for('static', filename='images/icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/icon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/icon.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='images/icon.png') }}">
+
+    <link rel="stylesheet"  href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <header>
+        <div class="wrapper">
+            <nav class="nothome">
+                <div class="logo">
+                    <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/tw-sitelogo.png') }}" alt=""></a>
+                </div>
+                <ul class="nav-menu">
+                    <li>
+                        <a href="#" class="nav-link">NEWS</a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link">MUSIC</a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link">VIDEOS</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('store') }}" class="nav-link">STORE</a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link">XOFUND</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('signin') }}" class="nav-link">NEWSLETTER</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('signin') }}" class="nav-link">CART</a>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+            <!-- End of navigation menu -->
+        <section>
+            <h1>Order Details</h1>
+            <h2>Items</h2>
+            <table>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Image</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Total</th>
+                </tr>
+                {% for item in items %}
+                <tr>
+                    <td>{{item[0]}}</td>
+                    <td>{{item[1]}}</td>
+                    <td>{{item[2]}}</td>
+                    <td>{{item[3]}}</td>
+                    <td>{{item[4]}}</td>
+                    <td>{{item[5]}}</td>
+                </tr>
+                {% endfor %}
+            </table>
+        </section>
+</body>
+</html>

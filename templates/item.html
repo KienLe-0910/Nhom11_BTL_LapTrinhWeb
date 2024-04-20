@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>THE WEEKEND</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@400;700&family=Fjalla+One&display=swap"
+        rel="stylesheet">
+
+    <link rel="xo-icon" sizes="180x180" href="{{ url_for('static', filename='images/icon.png') }}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{ url_for('static', filename='images/icon.png') }}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{ url_for('static', filename='images/icon.png') }}">
+    <link rel="manifest" href="{{ url_for('static', filename='images/icon.png') }}">
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body>
+    <script>
+        window.onload = function () {
+            // Get the value from localStorage
+            var value = localStorage.getItem('myValue');
+
+            // Display the value on the page
+            var output = document.getElementById('value-output');
+            output.innerText = value;
+        };
+    </script>
+    <header>
+        <div class="wrapper">
+            <nav class="nothome">
+                <div class="logo">
+                    <a href="{{ url_for('index') }}"><img src="{{ url_for('static', filename='images/tw-sitelogo.png') }}" alt=""></a>
+                </div>
+                <ul class="nav-menu">
+                    <li>
+                        <a href="#" class="nav-link">NEWS</a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link">MUSIC</a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link">VIDEOS</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('store') }}" class="nav-link">STORE</a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link">XOFUND</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('signin') }}" class="nav-link">NEWSLETTER</a>
+                    </li>
+                    <li>
+                        <a href="{{ url_for('signin') }}" class="nav-link">CART</a>
+                    </li>
+                    <li>
+                        <a href="#" class="nav-link" id="value-output"></a>
+                    </li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+            <!-- End of navigation menu -->
+        </div>
+    </header>
+
+    <div class="wrapper">
+        <section class="itemsection">
+            <div class="product">
+                {% for slide in item_slides %}
+                    <img class="mySlides" src="{{ url_for('static', filename=slide['image_url']) }}" style="width:55%;display:none">
+                {% endfor %}
+                <div class="row-padding">
+                    {% for slide in item_slides %}
+                        <img src="{{ url_for('static', filename=slide['image_url']) }}" onclick="currentDiv({{ loop.index }})">
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="desc">
+                <h1>{{ item_details['name'] }}<br>${{ item_details['price'] }}</h1>
+                <p class="tracklist">{{ item_details['des']|safe }}</p>
+                <p class="note">{{ item_details['note'] }}</p>
+                <p class="copyright">{{ item_details['copyright'] }}</p>
+            </div>
+            <div class="add">
+                <a href="{{ url_for('acc') }}">ADD TO CART</a>
+            </div>
+        </section>
+    </div>
+    <!-- End of item section -->
+
+    <div class="wrapper">
+        <section class="footersection">
+            <div class="follow">
+                <ul>
+                    <li>
+                        <a href="#"><img src="{{ url_for('static', filename='images/facebook.png') }}" width="22"></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="{{ url_for('static', filename='images/instagram.png') }}" width="22"></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="{{ url_for('static', filename='images/twitter.png') }}" width="22"></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="{{ url_for('static', filename='images/youtube.png') }}" width="22"></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="{{ url_for('static', filename='images/soundcloud.png') }}" width="22"></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="{{ url_for('static', filename='images/apple.png') }}" width="22"></a>
+                    </li>
+                    <li>
+                        <a href="#"><img src="{{ url_for('static', filename='images/spotify.png') }}" width="22"></a>
+                    </li>
+                </ul>
+            </div>
+            <div class="link">
+                <ul>
+                    <li>
+                        <a href="#">COPYRIGHT REPLUBIC RECORD</a>
+                    </li>
+                    <li>
+                        <a href="#">TERMS & CONDITIONS</a>
+                    </li>
+                    <li>
+                        <a href="#">PRIVACY POLICY</a>
+                    </li>
+                    <li>
+                        <a href="#">DO NOT SELL MY PERSONAL INFORMATION</a>
+                    </li>
+                </ul>
+            </div>
+        </section>
+    </div>
+    <!-- End of footer section -->
+
+    <script src="{{ url_for('static', filename='main.js') }}"></script>
+</body>
+
+</html>
